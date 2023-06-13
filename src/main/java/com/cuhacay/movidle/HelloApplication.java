@@ -1,43 +1,62 @@
 package com.cuhacay.movidle;
 
 import com.cuhacay.movidle.autocomplete.AutoCompleteTextField;
-import com.cuhacay.movidle.autocomplete.VisualAutoCompleteTextField;
-import com.cuhacay.movidle.autocomplete.model.VisualSuggestion;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        URL url = getClass().getClassLoader().getResource("imdb_top_250_with_images.csv");
+        File file = new File(url.getFile());
+
+        ArrayList<String[]> films = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] row = line.split(";");
+                films.add(row);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Parent parent = fxmlLoader.load();
         parent.setStyle("-fx-background-color: gray");
 
-        AutoCompleteTextField textField = (VisualAutoCompleteTextField) fxmlLoader.getNamespace().get("autoComplete");
-        textField.setResource(Arrays.asList(
-                new VisualSuggestion(
-                        "Avengers: Infinity War",
-                        "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_FMjpg_UX1000_.jpg"
-                ),
-                new VisualSuggestion(
-                        "The Dark Knight Rises",
-                        "https://m.media-amazon.com/images/M/MV5BMTk4ODQzNDY3Ml5BMl5BanBnXkFtZTcwODA0NTM4Nw@@._V1_FMjpg_UX1000_.jpg"
-                )
-        ));
+        AutoCompleteTextField textField = (AutoCompleteTextField) fxmlLoader.getNamespace().get("autoComplete");
+        List<String> filmsList = convertToStringList(films);
+        textField.setResource(filmsList);
 
         Scene scene = new Scene(parent, 500, 500);
-        stage.setTitle("Movidle");
+        stage.setTitle("Hello Application");
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch();
+    private List<String> convertToStringList(ArrayList<String[]> films) {
+        List<String> filmList = new ArrayList<>();
+        for (String[] row : films) {
+            String filmString = String.join(";", row);
+            filmList.add(filmString);
+        }
+        return filmList;
     }
+
+
+    public static void main(String[] args) { launch(); }
 }
