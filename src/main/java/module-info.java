@@ -7,4 +7,6 @@ module com.cuhacay.movidle {
 
     opens com.cuhacay.movidle to javafx.fxml;
     exports com.cuhacay.movidle;
+    exports com.cuhacay.movidle.square;
+    opens com.cuhacay.movidle.square to javafx.fxml;
 }
