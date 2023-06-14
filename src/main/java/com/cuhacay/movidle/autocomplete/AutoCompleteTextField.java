@@ -1,5 +1,6 @@
-package com.cuhacay.movidle;
+package com.cuhacay.movidle.autocomplete;
 
+import com.cuhacay.movidle.autocomplete.model.Suggestion;
 import javafx.geometry.Bounds;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -9,21 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoCompleteTextField extends TextField {
-    List<String> resource = new ArrayList<>();
+    List<Suggestion> resource = new ArrayList<>();
 
-    List<String> suggestions = new ArrayList<>();
+    List<Suggestion> suggestions = new ArrayList<>();
 
     ContextMenu contextMenu = new ContextMenu();
 
-    public void setResource(List<String> resource) {
+    public void setResource(List<Suggestion> resource) {
         this.resource = resource;
     }
 
     public AutoCompleteTextField() {
         createSuggestionsMenu();
         textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() > 2) {
-                suggestions = resource.stream().filter(item -> item.toLowerCase().contains(newValue.toLowerCase())).toList();
+            if (newValue.length() > 0) {
+                suggestions = resource
+                        .stream()
+                        .filter(item -> item.getTitle().toLowerCase().contains(newValue.toLowerCase()))
+                        .toList();
                 createSuggestionsMenu();
                 showContextMenu();
             } else contextMenu.hide();
@@ -40,12 +44,17 @@ public class AutoCompleteTextField extends TextField {
     void createSuggestionsMenu() {
         contextMenu.getItems().clear();
         suggestions.forEach(suggestion -> {
-            MenuItem menuItem = new MenuItem(suggestion);
+            MenuItem menuItem = createMenuItem(suggestion);
             menuItem.setOnAction(event -> {
-                textProperty().set(menuItem.getText());
+                textProperty().set(suggestion.getTitle());
                 end();
             });
             contextMenu.getItems().add(menuItem);
         });
+    }
+
+    MenuItem createMenuItem(Suggestion suggestion) {
+        MenuItem menuItem = new MenuItem(suggestion.getTitle());
+        return menuItem;
     }
 }
