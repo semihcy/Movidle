@@ -1,6 +1,8 @@
 package com.cuhacay.movidle;
 
 import com.cuhacay.movidle.autocomplete.AutoCompleteTextField;
+import com.cuhacay.movidle.autocomplete.VisualAutoCompleteTextField;
+import com.cuhacay.movidle.autocomplete.model.VisualSuggestion;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,13 +24,22 @@ public class HelloApplication extends Application {
         URL url = getClass().getClassLoader().getResource("imdb_top_250_with_images.csv");
         File file = new File(url.getFile());
 
-        ArrayList<String[]> films = new ArrayList<>();
+        ArrayList<Movie> films = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] row = line.split(";");
-                films.add(row);
+                Movie movie = new Movie(
+                        row[1],
+                        Integer.parseInt(row[2]),
+                        row[3],
+                        row[4],
+                        row[5],
+                        row[6],
+                        row[7]
+                );
+                films.add(movie);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -38,9 +49,8 @@ public class HelloApplication extends Application {
         Parent parent = fxmlLoader.load();
         parent.setStyle("-fx-background-color: gray");
 
-        AutoCompleteTextField textField = (AutoCompleteTextField) fxmlLoader.getNamespace().get("autoComplete");
-        List<String> filmsList = convertToStringList(films);
-        textField.setResource(filmsList);
+        VisualAutoCompleteTextField textField = (VisualAutoCompleteTextField) fxmlLoader.getNamespace().get("autoComplete");
+        textField.setResource(films.stream().map(film -> new VisualSuggestion(film.getName(),film.getImageUrl())).toList());
 
         Scene scene = new Scene(parent, 500, 500);
         stage.setTitle("Hello Application");
@@ -48,14 +58,6 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    private List<String> convertToStringList(ArrayList<String[]> films) {
-        List<String> filmList = new ArrayList<>();
-        for (String[] row : films) {
-            String filmString = String.join(";", row);
-            filmList.add(filmString);
-        }
-        return filmList;
-    }
 
 
     public static void main(String[] args) { launch(); }
