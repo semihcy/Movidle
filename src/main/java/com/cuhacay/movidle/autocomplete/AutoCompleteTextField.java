@@ -26,7 +26,7 @@ public class AutoCompleteTextField extends TextField {
             if (newValue.length() > 0) {
                 suggestions = resource
                         .stream()
-                        .filter(item -> item.getTitle().toLowerCase().contains(newValue.toLowerCase()))
+                        .filter(item -> item.getTitle().toLowerCase().startsWith(newValue.toLowerCase().substring(0, 1)) && item.getTitle().toLowerCase().contains(newValue.toLowerCase()))
                         .toList();
                 createSuggestionsMenu();
                 showContextMenu();
