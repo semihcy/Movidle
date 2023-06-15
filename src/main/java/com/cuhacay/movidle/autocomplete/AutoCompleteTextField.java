@@ -17,14 +17,14 @@ public class AutoCompleteTextField extends TextField {
 
     List<Suggestion> suggestions = new ArrayList<>();
 
-    ContextMenu contextMenu = new ContextMenu();
+    ContextMenu contextMenu = new MaxSizedContextMenu();
 
     public void setResource(List<Suggestion> resource) {
         this.resource = resource;
     }
 
     public AutoCompleteTextField() {
-        resizeTheMenu();
+        contextMenu.setMaxHeight(400);
         createSuggestionsMenu();
         textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() > 0) {
@@ -55,16 +55,6 @@ public class AutoCompleteTextField extends TextField {
             });
             contextMenu.getItems().add(menuItem);
         });
-    }
-
-    void resizeTheMenu() {
-        contextMenu.addEventHandler(Menu.ON_SHOWING, e -> {
-            Node content = getSkin().getNode();
-            if (content instanceof Region) {
-                ((Region) content).setMaxHeight(getMaxHeight());
-            }
-        });
-        contextMenu.setMaxHeight(400);
     }
 
     MenuItem createMenuItem(Suggestion suggestion) {
