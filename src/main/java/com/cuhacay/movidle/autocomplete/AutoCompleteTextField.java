@@ -1,6 +1,7 @@
 package com.cuhacay.movidle.autocomplete;
 
 import com.cuhacay.movidle.autocomplete.model.Suggestion;
+import com.cuhacay.movidle.autocomplete.model.VisualSuggestion;
 import javafx.geometry.Bounds;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -26,7 +27,7 @@ public class AutoCompleteTextField extends TextField {
             if (newValue.length() > 0) {
                 suggestions = resource
                         .stream()
-                        .filter(item -> item.getTitle().toLowerCase().startsWith(newValue.toLowerCase().substring(0, 1)) && item.getTitle().toLowerCase().contains(newValue.toLowerCase()))
+                        .filter(item -> item.getTitle().toLowerCase().startsWith(newValue.toLowerCase().substring(0, 1)) || item.getTitle().toLowerCase().contains(newValue.toLowerCase()))
                         .toList();
                 createSuggestionsMenu();
                 showContextMenu();
