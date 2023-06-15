@@ -13,10 +13,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        ArrayList<Movie> films = new ArrayList<>();
+        ArrayList<Movie> movies = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader("imdb_top_250_with_images.csv"))) {
             String line="";
@@ -43,24 +44,28 @@ public class HelloApplication extends Application {
                         row[6],
                         row[8]
                 );
-                films.add(movie);
+                movies.add(movie);
             }
         }
         catch (IOException e) {
             e.printStackTrace();
         }
 
+        RandomMovie movieSelector = new RandomMovie(movies);
+        Movie randomMovie = movieSelector.selectRandomMovie();
+        System.out.println("Random Film: " + randomMovie.getName());
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Parent parent = fxmlLoader.load();
         parent.setStyle("-fx-background-color: gray");
 
         VisualAutoCompleteTextField textField = (VisualAutoCompleteTextField) fxmlLoader.getNamespace().get("autoComplete");
-        textField.setResource(films.stream().map(film -> (Suggestion) new VisualSuggestion(film.getName(),film.getImageUrl())).toList());
+        textField.setResource(movies.stream().map(movie -> (Suggestion) new VisualSuggestion(movie.getName(),movie.getImageUrl())).toList());
 
         Scene scene = new Scene(parent, 500, 500);
         stage.setTitle("Hello Application");
         stage.setScene(scene);
         stage.show();
     }
-    public static void main(String[] args) { launch(); }
+    public static void main(String[] args) { launch();}
 }
