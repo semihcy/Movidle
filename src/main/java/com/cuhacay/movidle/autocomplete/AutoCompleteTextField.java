@@ -1,11 +1,13 @@
 package com.cuhacay.movidle.autocomplete;
 
 import com.cuhacay.movidle.autocomplete.model.Suggestion;
-import com.cuhacay.movidle.autocomplete.model.VisualSuggestion;
 import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +24,13 @@ public class AutoCompleteTextField extends TextField {
     }
 
     public AutoCompleteTextField() {
+        resizeTheMenu();
         createSuggestionsMenu();
         textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() > 0) {
                 suggestions = resource
                         .stream()
-                        .filter(item -> item.getTitle().toLowerCase().startsWith(newValue.toLowerCase().substring(0, 1)) || item.getTitle().toLowerCase().contains(newValue.toLowerCase()))
+                        .filter(item -> item.getTitle().toLowerCase().startsWith(newValue.toLowerCase()))
                         .toList();
                 createSuggestionsMenu();
                 showContextMenu();
@@ -52,6 +55,16 @@ public class AutoCompleteTextField extends TextField {
             });
             contextMenu.getItems().add(menuItem);
         });
+    }
+
+    void resizeTheMenu() {
+        contextMenu.addEventHandler(Menu.ON_SHOWING, e -> {
+            Node content = getSkin().getNode();
+            if (content instanceof Region) {
+                ((Region) content).setMaxHeight(getMaxHeight());
+            }
+        });
+        contextMenu.setMaxHeight(400);
     }
 
     MenuItem createMenuItem(Suggestion suggestion) {

@@ -1,6 +1,5 @@
 package com.cuhacay.movidle;
 
-import com.cuhacay.movidle.autocomplete.AutoCompleteTextField;
 import com.cuhacay.movidle.autocomplete.VisualAutoCompleteTextField;
 import com.cuhacay.movidle.autocomplete.model.Suggestion;
 import com.cuhacay.movidle.autocomplete.model.VisualSuggestion;
