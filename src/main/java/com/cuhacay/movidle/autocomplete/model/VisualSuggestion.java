@@ -13,6 +13,7 @@ public class VisualSuggestion extends Suggestion {
         return imageUrl;
     }
 
+
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }

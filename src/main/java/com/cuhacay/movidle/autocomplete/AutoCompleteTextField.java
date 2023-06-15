@@ -1,6 +1,7 @@
 package com.cuhacay.movidle.autocomplete;
 
 import com.cuhacay.movidle.autocomplete.model.Suggestion;
+import com.cuhacay.movidle.autocomplete.model.VisualSuggestion;
 import javafx.geometry.Bounds;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
