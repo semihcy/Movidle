@@ -21,8 +21,8 @@ public class VisualAutoCompleteTextField extends AutoCompleteTextField {
         hBox.setAlignment(Pos.CENTER);
         ImageView image = new ImageView();
         loadImageAsynchronously(image, visualSuggestion.getImageUrl());
-        image.setFitWidth(100);
-        image.setFitHeight(150);
+        image.setFitWidth(50);
+        image.setFitHeight(75);
         Label label = new Label(visualSuggestion.getTitle());
         hBox.getChildren().addAll(image, label);
         MenuItem menuItem = new MenuItem();
