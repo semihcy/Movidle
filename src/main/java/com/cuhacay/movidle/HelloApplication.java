@@ -7,6 +7,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -62,10 +64,35 @@ public class HelloApplication extends Application {
         VisualAutoCompleteTextField textField = (VisualAutoCompleteTextField) fxmlLoader.getNamespace().get("autoComplete");
         textField.setResource(movies.stream().map(movie -> (Suggestion) new VisualSuggestion(movie.getName(),movie.getImageUrl())).toList());
 
+
+
+        Button submitButton = (Button) fxmlLoader.getNamespace().get("submitButton");
+        submitButton.setOnAction(event -> {
+            String userInput = textField.getText();
+            boolean userInputExists = movies.stream()
+                    .map(Movie::getName)
+                    .anyMatch(name -> name.equals(userInput));
+            if (userInputExists) {
+                System.out.println(userInput);
+            } else {
+                showErrorDialog("Invalid input!", "Please enter valid input.");
+            }
+        });
+
+
+
         Scene scene = new Scene(parent, 500, 500);
         stage.setTitle("Hello Application");
         stage.setScene(scene);
         stage.show();
     }
     public static void main(String[] args) { launch();}
+
+    private void showErrorDialog(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

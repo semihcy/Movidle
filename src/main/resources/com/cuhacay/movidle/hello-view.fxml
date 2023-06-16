@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.cuhacay.movidle.*?>
+<?import com.cuhacay.movidle.autocomplete.*?>
+<?import com.cuhacay.movidle.square.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import com.cuhacay.movidle.square.GreenMagicSquare?>
-<?import com.cuhacay.movidle.square.UpArrowMagicSquare?>
-<?import com.cuhacay.movidle.square.DownArrowMagicSquare?>
-<?import com.cuhacay.movidle.square.RedMagicSquare?>
-
-<?import com.cuhacay.movidle.autocomplete.VisualAutoCompleteTextField?>
-<VBox alignment="TOP_CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cuhacay.movidle.HelloController">
+<VBox alignment="TOP_CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cuhacay.movidle.HelloController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-
-    <VisualAutoCompleteTextField fx:id="autoComplete"/>
     <HBox spacing="10">
-        <VBox>
-            <Label text="Film"></Label>
-            <GreenMagicSquare title="Interstaller" prefWidth="75" prefHeight="75"/>
+            <VisualAutoCompleteTextField fx:id="autoComplete" HBox.hgrow="ALWAYS" />
+            <Button fx:id="submitButton" HBox.hgrow="ALWAYS" text="Submit" />
+    </HBox>
+    <HBox spacing="10">
+        <VBox fx:id="title" alignment="CENTER">
+            <Label text="Title"/>
+            <UpArrowMagicSquare prefHeight="75" prefWidth="75" title="2016" />
         </VBox>
-        <VBox>
-            <Label text="Yıl"></Label>
-            <UpArrowMagicSquare title="2016" prefWidth="75" prefHeight="75"/>
+        <VBox fx:id="year" alignment="CENTER">
+            <Label text="Year" />
+            <DownArrowMagicSquare prefHeight="75" prefWidth="75" title="2016" />
         </VBox>
-        <VBox>
-            <Label text="Yıl"></Label>
-            <DownArrowMagicSquare title="2016" prefWidth="75" prefHeight="75"/>
+        <VBox fx:id="genre" alignment="CENTER">
+            <Label text="Genre" />
+            <RedMagicSquare prefHeight="75" prefWidth="75" title="2016" />
         </VBox>
-        <VBox>
-            <Label text="Yıl"></Label>
-            <RedMagicSquare title="2016" prefWidth="75" prefHeight="75"/>
+        <VBox fx:id="origin" alignment="CENTER">
+            <Label text="Origin" />
+            <RedMagicSquare prefHeight="75" prefWidth="75" title="2016" />
+        </VBox>
+        <VBox fx:id="director" alignment="CENTER">
+            <Label text="Director" />
+            <RedMagicSquare prefHeight="75" prefWidth="75" title="2016" />
+        </VBox>
+        <VBox fx:id="star" alignment="CENTER">
+            <Label text="Star" />
+            <RedMagicSquare prefHeight="75" prefWidth="75" title="2016" />
         </VBox>
     </HBox>
 </VBox>
