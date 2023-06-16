@@ -22,4 +22,8 @@
         <Label alignment="CENTER" prefWidth="75" text="Director"/>
         <Label alignment="CENTER" prefWidth="75" text="Star"/>
     </HBox>
+
+    <VBox fx:id="squares">
+
+    </VBox>
 </VBox>
