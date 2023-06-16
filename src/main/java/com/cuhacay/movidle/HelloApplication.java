@@ -18,7 +18,7 @@ public class HelloApplication extends Application {
         Parent parent = fxmlLoader.load();
         parent.setStyle("-fx-background-color: gray");
 
-        Scene scene = new Scene(parent, 500, 500);
+        Scene scene = new Scene(parent, 545, 565);
         stage.setTitle("Hello Application");
         stage.setScene(scene);
         stage.show();
