@@ -17,11 +17,11 @@
     </HBox>
 
     <HBox fx:id="labels" spacing="10" alignment="TOP_LEFT">
-        <Label alignment="CENTER" prefWidth="75" text="Title"></Label>
-        <Label alignment="CENTER" prefWidth="75" text="Year"></Label>
-        <Label alignment="CENTER" prefWidth="75" text="Genre"></Label>
-        <Label alignment="CENTER" prefWidth="75" text="Origin"></Label>
-        <Label alignment="CENTER" prefWidth="75" text="Director"></Label>
-        <Label alignment="CENTER" prefWidth="75" text="Star"></Label>
+        <Label alignment="CENTER" prefWidth="75" text="Title"/>
+        <Label alignment="CENTER" prefWidth="75" text="Year"/>
+        <Label alignment="CENTER" prefWidth="75" text="Genre"/>
+        <Label alignment="CENTER" prefWidth="75" text="Origin"/>
+        <Label alignment="CENTER" prefWidth="75" text="Director"/>
+        <Label alignment="CENTER" prefWidth="75" text="Star"/>
     </HBox>
 </VBox>
