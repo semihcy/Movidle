@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.cuhacay.movidle.autocomplete.*?>
-<?import com.cuhacay.movidle.square.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <VBox fx:id="root" alignment="TOP_CENTER" spacing="5" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cuhacay.movidle.HelloController">
     <padding>
@@ -16,7 +14,7 @@
             <Button fx:id="submitButton" onMouseClicked="#onClickSubmit" HBox.hgrow="ALWAYS" text="Submit" />
     </HBox>
 
-    <HBox fx:id="labels" spacing="10">
+    <HBox fx:id="labels" visible="false" spacing="10">
         <Label alignment="CENTER" prefWidth="75" text="Title"/>
         <Label alignment="CENTER" prefWidth="75" text="Year"/>
         <Label alignment="CENTER" prefWidth="75" text="Genre"/>

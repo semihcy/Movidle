@@ -21,6 +21,8 @@ public abstract class MagicSquare extends StackPane {
 
     public MagicSquare() {
         setStyle("-fx-border-color: #ffffff; -fx-border-width: 1px; -fx-background-color: " + getColor() + ";");
+        setPrefHeight(75);
+        setPrefWidth(75);
         startAnim();
         init();
     }

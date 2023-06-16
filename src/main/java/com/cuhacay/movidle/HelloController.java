@@ -3,6 +3,8 @@ package com.cuhacay.movidle;
 import com.cuhacay.movidle.autocomplete.VisualAutoCompleteTextField;
 import com.cuhacay.movidle.autocomplete.model.Suggestion;
 import com.cuhacay.movidle.autocomplete.model.VisualSuggestion;
+import com.cuhacay.movidle.square.GreenMagicSquare;
+import com.cuhacay.movidle.square.RedMagicSquare;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -16,6 +18,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -35,19 +38,50 @@ public class HelloController implements Initializable {
     @FXML
     private Label welcomeText;
 
+
     @FXML
     protected void onClickSubmit(){
-
+        labels.setVisible(true);
         String userInput = autoComplete.getText();
-        boolean userInputExists = movies.stream()
-                .map(Movie::getName)
-                .anyMatch(name -> name.equals(userInput));
-        if (userInputExists) {
-            System.out.println(userInput);
-        } else {
-            showErrorDialog("Invalid input!", "Please enter valid input.");
-        }
+        List<Movie> filterMovies = movies.stream().filter(movie -> movie.getName().equals(userInput)).toList();
 
+        if (filterMovies.isEmpty()) {
+            showErrorDialog("Invalid input!", "Please enter valid input.");
+        } else {
+            Movie guess = filterMovies.get(0);
+            HBox guessProperties = new HBox();
+            guessProperties.setSpacing(10);
+
+                if (guess.getName().equals(randomMovie.getName()))
+                    guessProperties.getChildren().add(GreenMagicSquare.create(guess.getName()));
+                else
+                    guessProperties.getChildren().add(RedMagicSquare.create(guess.getName()));
+                if (guess.getYear() == (randomMovie.getYear()))
+                    guessProperties.getChildren().add(GreenMagicSquare.create(String.valueOf(guess.getYear())));
+                else
+                    guessProperties.getChildren().add(RedMagicSquare.create(String.valueOf(guess.getYear())));
+                if (guess.getGenre().equals(randomMovie.getGenre()))
+                    guessProperties.getChildren().add(GreenMagicSquare.create(guess.getGenre()));
+                else
+                    guessProperties.getChildren().add(RedMagicSquare.create(guess.getGenre()));
+                if (guess.getOrigin().equals(randomMovie.getOrigin()))
+                    guessProperties.getChildren().add(GreenMagicSquare.create(guess.getOrigin()));
+                else
+                    guessProperties.getChildren().add(RedMagicSquare.create(guess.getOrigin()));
+                if (guess.getDirector().equals(randomMovie.getDirector()))
+                    guessProperties.getChildren().add(GreenMagicSquare.create(guess.getDirector()));
+                else
+                    guessProperties.getChildren().add(RedMagicSquare.create(guess.getDirector()));
+                if (guess.getStar().equals(randomMovie.getStar()))
+                    guessProperties.getChildren().add(GreenMagicSquare.create(guess.getStar()));
+                else
+                    guessProperties.getChildren().add(RedMagicSquare.create(guess.getStar()));
+
+
+
+            root.getChildren().add(guessProperties);
+            System.out.println(guess.getName());
+        }
     }
     private void showErrorDialog(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
