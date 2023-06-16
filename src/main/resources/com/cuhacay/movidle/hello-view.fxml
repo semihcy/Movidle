@@ -26,4 +26,6 @@
     <VBox fx:id="squares" spacing="5">
 
     </VBox>
+    <Label fx:id="guessesLeftLabel" />
+
 </VBox>

@@ -13,6 +13,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -25,6 +27,8 @@ import java.util.ResourceBundle;
 public class HelloController implements Initializable {
 
     @FXML
+    private Label guessesLeftLabel;
+    @FXML
     public HBox labels;
     @FXML
     public Button submitButton;
@@ -35,11 +39,12 @@ public class HelloController implements Initializable {
     public VBox squares;
 
     private Movie randomMovie;
-
+    private int guessesLeft = 5;
     ArrayList<Movie> movies = new ArrayList<>();
     ArrayList<Movie> gameMovies = new ArrayList<>();
     @FXML
     protected void onClickSubmit() {
+        guessesLeftLabel.setVisible(true);
         labels.setVisible(true);
         String userInput = autoComplete.getText();
         List<Movie> filterMovies = movies.stream().filter(movie -> movie.getName().equals(userInput)).toList();
@@ -47,10 +52,14 @@ public class HelloController implements Initializable {
 
         if (filterMovies.isEmpty()) {
             showErrorDialog();
+
         } else {
             Movie guess = filterMovies.get(0);
             HBox guessProperties = new HBox();
             guessProperties.setSpacing(10);
+            guessesLeft--;
+            updateGuessesLeftLabel();
+
 
             if (guess.getName().equals(randomMovie.getName()))
                 guessProperties.getChildren().add(GreenMagicSquare.create(guess.getName()));
@@ -104,7 +113,9 @@ public class HelloController implements Initializable {
             if (squares.getChildren().size() > 4) showFinishDialog("Hey loser, tyr again!");
         }
     }
-
+    private void updateGuessesLeftLabel() {
+        guessesLeftLabel.setText("Guesses left: " + guessesLeft);
+    }
     private void showErrorDialog() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
@@ -125,6 +136,8 @@ public class HelloController implements Initializable {
         labels.setVisible(false);
         autoComplete.clear();
         gameMovies = movies;
+        guessesLeftLabel.setVisible(false);
+        guessesLeft = 5;
     }
     private void createNewRandomMovie() {
         RandomMovie movieSelector = new RandomMovie(gameMovies);
