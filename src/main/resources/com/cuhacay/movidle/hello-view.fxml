@@ -13,10 +13,10 @@
     </padding>
     <HBox spacing="10">
             <VisualAutoCompleteTextField fx:id="autoComplete" HBox.hgrow="ALWAYS" />
-            <Button fx:id="submitButton" HBox.hgrow="ALWAYS" text="Submit" />
+            <Button fx:id="submitButton" onMouseClicked="#onClickSubmit" HBox.hgrow="ALWAYS" text="Submit" />
     </HBox>
 
-    <HBox fx:id="labels" spacing="10" alignment="TOP_LEFT">
+    <HBox fx:id="labels" spacing="10">
         <Label alignment="CENTER" prefWidth="75" text="Title"/>
         <Label alignment="CENTER" prefWidth="75" text="Year"/>
         <Label alignment="CENTER" prefWidth="75" text="Genre"/>
