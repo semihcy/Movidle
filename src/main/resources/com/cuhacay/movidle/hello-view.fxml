@@ -16,11 +16,11 @@
 
     <HBox fx:id="labels" visible="false" spacing="10">
         <Label alignment="CENTER" prefWidth="75" text="Title"/>
-        <Label alignment="CENTER" prefWidth="75" text="Year"/>
         <Label alignment="CENTER" prefWidth="75" text="Genre"/>
         <Label alignment="CENTER" prefWidth="75" text="Origin"/>
         <Label alignment="CENTER" prefWidth="75" text="Director"/>
         <Label alignment="CENTER" prefWidth="75" text="Star"/>
+        <Label alignment="CENTER" prefWidth="75" text="Year"/>
     </HBox>
 
     <VBox fx:id="squares" spacing="5">

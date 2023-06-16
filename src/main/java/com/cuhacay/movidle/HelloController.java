@@ -3,8 +3,10 @@ package com.cuhacay.movidle;
 import com.cuhacay.movidle.autocomplete.VisualAutoCompleteTextField;
 import com.cuhacay.movidle.autocomplete.model.Suggestion;
 import com.cuhacay.movidle.autocomplete.model.VisualSuggestion;
+import com.cuhacay.movidle.square.DownArrowMagicSquare;
 import com.cuhacay.movidle.square.GreenMagicSquare;
 import com.cuhacay.movidle.square.RedMagicSquare;
+import com.cuhacay.movidle.square.UpArrowMagicSquare;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -54,26 +56,34 @@ public class HelloController implements Initializable {
                 guessProperties.getChildren().add(GreenMagicSquare.create(guess.getName()));
             else
                 guessProperties.getChildren().add(RedMagicSquare.create(guess.getName()));
-            if (guess.getYear() == (randomMovie.getYear()))
-                guessProperties.getChildren().add(GreenMagicSquare.create(String.valueOf(guess.getYear())));
-            else
-                guessProperties.getChildren().add(RedMagicSquare.create(String.valueOf(guess.getYear())));
+
             if (guess.getGenre().equals(randomMovie.getGenre()))
                 guessProperties.getChildren().add(GreenMagicSquare.create(guess.getGenre()));
             else
                 guessProperties.getChildren().add(RedMagicSquare.create(guess.getGenre()));
+
             if (guess.getOrigin().equals(randomMovie.getOrigin()))
                 guessProperties.getChildren().add(GreenMagicSquare.create(guess.getOrigin()));
             else
                 guessProperties.getChildren().add(RedMagicSquare.create(guess.getOrigin()));
+
             if (guess.getDirector().equals(randomMovie.getDirector()))
                 guessProperties.getChildren().add(GreenMagicSquare.create(guess.getDirector()));
             else
                 guessProperties.getChildren().add(RedMagicSquare.create(guess.getDirector()));
+
             if (guess.getStar().equals(randomMovie.getStar()))
                 guessProperties.getChildren().add(GreenMagicSquare.create(guess.getStar()));
             else
                 guessProperties.getChildren().add(RedMagicSquare.create(guess.getStar()));
+
+            if (guess.getYear() > randomMovie.getYear())
+                guessProperties.getChildren().add(DownArrowMagicSquare.create(String.valueOf(guess.getYear())));
+            else if (guess.getYear() < randomMovie.getYear())
+                guessProperties.getChildren().add(UpArrowMagicSquare.create(String.valueOf(guess.getYear())));
+            else
+                guessProperties.getChildren().add(GreenMagicSquare.create(String.valueOf(guess.getYear())));
+
 
             squares.getChildren().add(guessProperties);
             System.out.println(guess.getName());
