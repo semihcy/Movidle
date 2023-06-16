@@ -99,6 +99,7 @@ public class HelloController implements Initializable {
             }
             if (!isFail) {
                 showFinishDialog("Congratulations!");
+                createNewRandomMovie();
             }
             if (squares.getChildren().size() > 4) showFinishDialog("Hey loser, tyr again!");
         }
@@ -124,6 +125,11 @@ public class HelloController implements Initializable {
         labels.setVisible(false);
         autoComplete.clear();
         gameMovies = movies;
+    }
+    private void createNewRandomMovie() {
+        RandomMovie movieSelector = new RandomMovie(gameMovies);
+        randomMovie = movieSelector.selectRandomMovie();
+        System.out.println("New Random Film: " + randomMovie.getName());
     }
 
 
@@ -162,9 +168,7 @@ public class HelloController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        RandomMovie movieSelector = new RandomMovie(movies);
-        randomMovie = movieSelector.selectRandomMovie();
-        System.out.println("Random Film: " + randomMovie.getName());
+        createNewRandomMovie();
     }
+
 }
