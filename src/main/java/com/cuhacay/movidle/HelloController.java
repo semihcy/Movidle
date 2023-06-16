@@ -7,6 +7,7 @@ import com.cuhacay.movidle.square.DownArrowMagicSquare;
 import com.cuhacay.movidle.square.GreenMagicSquare;
 import com.cuhacay.movidle.square.RedMagicSquare;
 import com.cuhacay.movidle.square.UpArrowMagicSquare;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -14,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
-
+import javafx.util.Duration;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -128,6 +129,10 @@ public class HelloController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(title);
         alert.setOnCloseRequest(event -> onFinishGame());
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), alert.getDialogPane());
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.play();
         alert.showAndWait();
     }
 
