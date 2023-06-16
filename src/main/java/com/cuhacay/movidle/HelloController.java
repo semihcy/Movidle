@@ -5,13 +5,10 @@ import com.cuhacay.movidle.autocomplete.model.Suggestion;
 import com.cuhacay.movidle.autocomplete.model.VisualSuggestion;
 import com.cuhacay.movidle.square.GreenMagicSquare;
 import com.cuhacay.movidle.square.RedMagicSquare;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.DialogEvent;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -38,9 +35,7 @@ public class HelloController implements Initializable {
     private Movie randomMovie;
 
     ArrayList<Movie> movies = new ArrayList<>();
-
-
-
+    ArrayList<Movie> gameMovies = new ArrayList<>();
     @FXML
     protected void onClickSubmit() {
         labels.setVisible(true);
@@ -48,7 +43,7 @@ public class HelloController implements Initializable {
         List<Movie> filterMovies = movies.stream().filter(movie -> movie.getName().equals(userInput)).toList();
 
         if (filterMovies.isEmpty()) {
-            showErrorDialog("Invalid input!", "Please enter valid input.");
+            showErrorDialog();
         } else {
             Movie guess = filterMovies.get(0);
             HBox guessProperties = new HBox();
@@ -86,6 +81,8 @@ public class HelloController implements Initializable {
             for (int i = 0; i < guessProperties.getChildren().size(); i ++) {
                 if (!(guessProperties.getChildren().get(i) instanceof GreenMagicSquare)) {
                     isFail = true;
+                    gameMovies.remove(guess);
+                    autoComplete.setResource(gameMovies.stream().map(movie -> (Suggestion) new VisualSuggestion(movie.getName(), movie.getImageUrl())).toList());
                     break;
                 }
             }
@@ -96,11 +93,11 @@ public class HelloController implements Initializable {
         }
     }
 
-    private void showErrorDialog(String title, String message) {
+    private void showErrorDialog() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText("Please enter valid input!");
+        alert.setOnCloseRequest(event -> onFinishGame());
         alert.showAndWait();
     }
 
@@ -116,6 +113,7 @@ public class HelloController implements Initializable {
         squares.getChildren().clear();
         labels.setVisible(false);
         autoComplete.clear();
+        gameMovies = movies;
     }
 
     private void showLoseDialog() {
@@ -155,7 +153,9 @@ public class HelloController implements Initializable {
                 );
                 movies.add(movie);
             }
+            gameMovies = movies;
             autoComplete.setResource(movies.stream().map(movie -> (Suggestion) new VisualSuggestion(movie.getName(), movie.getImageUrl())).toList());
+
         } catch (IOException e) {
             e.printStackTrace();
         }

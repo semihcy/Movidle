@@ -23,7 +23,7 @@
         <Label alignment="CENTER" prefWidth="75" text="Star"/>
     </HBox>
 
-    <VBox fx:id="squares">
+    <VBox fx:id="squares" spacing="5">
 
     </VBox>
 </VBox>
