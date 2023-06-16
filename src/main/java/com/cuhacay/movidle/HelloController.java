@@ -41,6 +41,7 @@ public class HelloController implements Initializable {
         labels.setVisible(true);
         String userInput = autoComplete.getText();
         List<Movie> filterMovies = movies.stream().filter(movie -> movie.getName().equals(userInput)).toList();
+        autoComplete.clear();
 
         if (filterMovies.isEmpty()) {
             showErrorDialog();
@@ -87,9 +88,9 @@ public class HelloController implements Initializable {
                 }
             }
             if (!isFail) {
-                showWinDialog();
+                showFinishDialog("Congratulations!");
             }
-            if (squares.getChildren().size() > 4) showLoseDialog();
+            if (squares.getChildren().size() > 4) showFinishDialog("Hey loser, tyr again!");
         }
     }
 
@@ -97,14 +98,13 @@ public class HelloController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
         alert.setContentText("Please enter valid input!");
-        alert.setOnCloseRequest(event -> onFinishGame());
         alert.showAndWait();
     }
 
-    private void showWinDialog() {
+    private void showFinishDialog(String title) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
-        alert.setContentText("Congratulations!");
+        alert.setContentText(title);
         alert.setOnCloseRequest(event -> onFinishGame());
         alert.showAndWait();
     }
@@ -116,13 +116,6 @@ public class HelloController implements Initializable {
         gameMovies = movies;
     }
 
-    private void showLoseDialog() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setContentText("Hey loser, try again!");
-        alert.setOnCloseRequest(event -> onFinishGame());
-        alert.showAndWait();
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
