@@ -31,7 +31,7 @@ public class VisualAutoCompleteTextField extends AutoCompleteTextField {
     }
 
     void loadImageAsynchronously(ImageView imageView, String imageUrl) {
-        String imagePlaceHolderUri = new File("movie_poster_image_place_holder.png").toURI().toString();
+        String imagePlaceHolderUri = new File("images/movie_poster_image_place_holder.png").toURI().toString();
         imageView.setImage(new Image(imagePlaceHolderUri));
         Task<Image> imageLoadingTask = new Task<>() {
             @Override

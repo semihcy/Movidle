@@ -1,6 +1,7 @@
 module com.cuhacay.movidle {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.media;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -13,4 +14,5 @@ module com.cuhacay.movidle {
     opens com.cuhacay.movidle.autocomplete to javafx.fxml;
     exports com.cuhacay.movidle.autocomplete.model;
     opens com.cuhacay.movidle.autocomplete.model to javafx.fxml;
+
 }
