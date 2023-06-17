@@ -16,7 +16,7 @@ public class MovidleApplication extends Application {
         Parent parent = fxmlLoader.load();
         parent.setStyle("-fx-background-color: gray");
         Scene scene = new Scene(parent, 545, 500);
-        stage.setTitle("Hello Application");
+        stage.setTitle("Movidle");
         stage.setScene(scene);
         stage.show();
     }
