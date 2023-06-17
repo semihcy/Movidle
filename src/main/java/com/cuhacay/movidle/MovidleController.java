@@ -106,12 +106,12 @@ public class MovidleController implements Initializable {
                 }
             }
             if (!isFail) {
-                playSound("yeah.m4a");
+                playSound("sounds/yeah.m4a");
                 showFinishDialog("Congratulations!");
                 createNewRandomMovie();
             }
             if (squares.getChildren().size() > 4) {
-                playSound("you_lost_again_and_again.m4a");
+                playSound("sounds/you_lost_again_and_again.m4a");
                 showFinishDialog("Hey loser, try again!");
             }
         }

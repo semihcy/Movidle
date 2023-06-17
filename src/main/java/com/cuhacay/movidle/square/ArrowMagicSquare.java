@@ -7,7 +7,7 @@ import java.io.File;
 public abstract class ArrowMagicSquare extends RedMagicSquare {
 
     public ArrowMagicSquare() {
-        ImageView imageView = new ImageView(new Image(new File("arrow.jpeg").toURI().toString()));
+        ImageView imageView = new ImageView(new Image(new File("images/arrow.jpeg").toURI().toString()));
         imageView.setRotate(getRotationValue());
         imageView.setFitWidth(65);
         imageView.setFitHeight(65);
