@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.cuhacay.movidle.autocomplete.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<VBox fx:id="root" alignment="TOP_CENTER" spacing="5" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cuhacay.movidle.MovidleController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <HBox spacing="10">
+            <VisualAutoCompleteTextField fx:id="autoComplete" HBox.hgrow="ALWAYS" />
+        <Button fx:id="submitButton" onMouseClicked="#onClickSubmit" HBox.hgrow="ALWAYS">
+            <graphic>
+                <ImageView fitWidth="15" fitHeight="15">
+                    <image>
+                        <Image url="@send_icon.jpeg" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+    </HBox>
+
+    <HBox fx:id="labels" visible="false" spacing="10">
+        <Label alignment="CENTER" prefWidth="75" text="Title"/>
+        <Label alignment="CENTER" prefWidth="75" text="Genre"/>
+        <Label alignment="CENTER" prefWidth="75" text="Origin"/>
+        <Label alignment="CENTER" prefWidth="75" text="Director"/>
+        <Label alignment="CENTER" prefWidth="75" text="Star"/>
+        <Label alignment="CENTER" prefWidth="75" text="Year"/>
+    </HBox>
+
+    <VBox fx:id="squares" spacing="5">
+
+    </VBox>
+    <Label fx:id="guessesLeftLabel" />
+
+</VBox>

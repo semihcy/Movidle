@@ -9,16 +9,13 @@ import java.io.IOException;
 
 
 
-public class HelloApplication extends Application {
+public class MovidleApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-
-
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MovidleApplication.class.getResource("movidle-view.fxml"));
         Parent parent = fxmlLoader.load();
         parent.setStyle("-fx-background-color: gray");
-
-        Scene scene = new Scene(parent, 545, 565);
+        Scene scene = new Scene(parent, 545, 500);
         stage.setTitle("Hello Application");
         stage.setScene(scene);
         stage.show();

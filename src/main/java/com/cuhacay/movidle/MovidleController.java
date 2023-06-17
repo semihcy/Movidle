@@ -7,7 +7,6 @@ import com.cuhacay.movidle.square.DownArrowMagicSquare;
 import com.cuhacay.movidle.square.GreenMagicSquare;
 import com.cuhacay.movidle.square.RedMagicSquare;
 import com.cuhacay.movidle.square.UpArrowMagicSquare;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -15,9 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
-import javafx.util.Duration;
-
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -25,8 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class HelloController implements Initializable {
-
+public class MovidleController implements Initializable {
     @FXML
     private Label guessesLeftLabel;
     @FXML
@@ -37,6 +36,7 @@ public class HelloController implements Initializable {
     public VisualAutoCompleteTextField autoComplete;
     @FXML
     public VBox root;
+
     public VBox squares;
 
     private Movie randomMovie;
@@ -53,14 +53,12 @@ public class HelloController implements Initializable {
 
         if (filterMovies.isEmpty()) {
             showErrorDialog();
-
         } else {
             Movie guess = filterMovies.get(0);
             HBox guessProperties = new HBox();
             guessProperties.setSpacing(10);
             guessesLeft--;
             updateGuessesLeftLabel();
-
 
             if (guess.getName().equals(randomMovie.getName()))
                 guessProperties.getChildren().add(GreenMagicSquare.create(guess.getName()));
@@ -108,10 +106,14 @@ public class HelloController implements Initializable {
                 }
             }
             if (!isFail) {
+                playSound("yeah.m4a");
                 showFinishDialog("Congratulations!");
                 createNewRandomMovie();
             }
-            if (squares.getChildren().size() > 4) showFinishDialog("Hey loser, tyr again!");
+            if (squares.getChildren().size() > 4) {
+                playSound("you_lost_again_and_again.m4a");
+                showFinishDialog("Hey loser, try again!");
+            }
         }
     }
     private void updateGuessesLeftLabel() {
@@ -129,11 +131,13 @@ public class HelloController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(title);
         alert.setOnCloseRequest(event -> onFinishGame());
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), alert.getDialogPane());
-        fadeTransition.setFromValue(0.0);
-        fadeTransition.setToValue(1.0);
-        fadeTransition.play();
         alert.showAndWait();
+    }
+
+    void playSound(String mediaPath) {
+        Media media = new Media(new File(mediaPath).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
     }
 
     private void onFinishGame() {
