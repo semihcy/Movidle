@@ -8,16 +8,23 @@ Movidle is a movie guessing game developed using JavaFX that challenges players 
 
 ```java
 public class MovidleController implements Initializable {}
-// lorem
+// Serves as the controller class for a Movidle application, implementing the Initializable interface.
+// Controls the behavior of the Movidle application's UI elements and handles user interactions.
+// Manages the game logic, updates the UI based on user input, and communicates with the Movie class to retrieve movie information.
 
 public class MovidleApplication extends Application {}
-// lorem
+// It is the main class of a JavaFX application that represents a Movidle application.
+// Extends the Application class, which is a base class provided by JavaFX for creating JavaFX applications.
+// Sets up the JavaFX application by loading the UI from an FXML file.
+// Serves as the entry point for the application.
+// Initializes the graphical user interface.
 
 public class Movie {}
-//
+// Represents a movie and contains various properties and methods to access and modify its information.
+// It has a constructor that allows you to create a new instance of the Movie class.
 
 public class RandomMovie {}
-//
+// Represents a utility class for selecting a random movie from a collection of movies.
 
 public abstract class MagicSquare extends StackPane {}
 // It is the base class of all the squares. 
