@@ -69,6 +69,8 @@ public class Suggestion {}
 public class VisualSuggestion extends Suggestion {}
 // This model class is used in list for visual autocomplete class.
 ```
+## Use Case Diagram
+![use_case_diagram.png](use_case_diagram.png)
 ## UML Class Diagram
 ![movidle_class_diagram.png](movidle_class_diagram.png)
 ## Screenshots
