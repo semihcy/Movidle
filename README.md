@@ -73,7 +73,7 @@ public class VisualSuggestion extends Suggestion {}
 ![use_case_diagram.png](use_case_diagram.png)
 ## UML Class Diagram
 ![movidle_class_diagram.png](movidle_class_diagram.png)
-## Screenshots
+## Screenshot
 <p align="center">
   <img src="screenshots%2Fautocomplete.png" alt="Image" style="width:100%">
 </p>
