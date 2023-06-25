@@ -16,10 +16,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -157,8 +155,11 @@ public class MovidleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try (BufferedReader br = new BufferedReader(new FileReader("imdb_top_250_with_images.csv"))) {
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(
+                        new FileInputStream("imdb_top_250_with_images.csv"), "ISO-8859-1"))) {
             String line = "";
+
             boolean isFirstLine = true;
             while ((line = br.readLine()) != null) {
                 if (isFirstLine) {
