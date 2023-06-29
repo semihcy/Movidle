@@ -84,3 +84,6 @@ public class VisualSuggestion extends Suggestion {}
 <p align="center">
   <img src="screenshots%2Fautocomplete.png" alt="Image" style="width:100%">
 </p>
+
+## Video
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/wtOprGJemXE/0.jpg)](https://www.youtube.com/watch?v=wtOprGJemXE)
