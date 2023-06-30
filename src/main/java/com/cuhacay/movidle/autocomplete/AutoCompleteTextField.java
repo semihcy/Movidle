@@ -25,7 +25,6 @@ public class AutoCompleteTextField extends TextField {
 
     public AutoCompleteTextField() {
         contextMenu.setMaxHeight(400);
-        createSuggestionsMenu();
         textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() > 0) {
                 suggestions = resource
